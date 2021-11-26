@@ -296,6 +296,12 @@ body {
 			}
 		}
 
+		&.github-me {
+			a {
+				background-image: url(../img/icon-github-me.svg);
+			}
+		}
+
 		&.twitter {
 			a {
 				background-image: url(../img/icon-twitter.svg);
@@ -305,6 +311,12 @@ body {
 		&.instagram {
 			a {
 				background-image: url(../img/icon-instagram.svg);
+			}
+		}
+		
+		&.email {
+			a {
+				background-image: url(../img/icon-email.svg);
 			}
 		}
 		

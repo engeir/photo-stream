@@ -1,0 +1,173 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title data-title="Flott Flyt Fotos">San Francisco by</title>
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://gallery.flottflyt.com/feed.xml">
+    <meta property="og:title" content="San Francisco by">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="/san-francisco-by/">
+    <meta property="og:image" content="https://gallery.flottflyt.com//photos/large/San%20Francisco%20by-686656.jpg">
+    <meta property="og:site_name" content="Flott Flyt Fotos">
+    <meta property="og:description" content="@engeir's minimalistic, self-hosted photo stream.">
+    <meta name="thumbnail" content="https://gallery.flottflyt.com//photos/large/San%20Francisco%20by-686656.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="engereirik">
+    <meta name="twitter:title" content="San Francisco by">
+    <meta name="twitter:description" content="@engeir's minimalistic, self-hosted photo stream.">
+    <meta name="twitter:image:src" content="https://gallery.flottflyt.com//photos/large/San%20Francisco%20by-686656.jpg">
+    <meta name="description" content="@engeir's minimalistic, self-hosted photo stream.">
+    <script type="text/javascript" src="/js/lazy-loading.js"></script>
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/master.css" />
+    <link rel="shortcut icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="touch-icon-iphone.png" />
+    <link rel="mask-icon" href="favicon.svg" />
+  </head>
+  <body>
+    <ul class="grid" id="target">
+      <li class="item target" id="id-san-francisco-by" style="background-image: url('/photos/tint/San%20Francisco%20by-65ba1d.jpg')" title="San Francisco by">
+        <img class="lazyload" data-src="/photos/thumbnail/San%20Francisco%20by-ccf4df.jpg" src="/photos/tint/San%20Francisco%20by-65ba1d.jpg" height="4000" width="6000" />
+        <span class="full">
+          <span style="background-image: url('/photos/large/San%20Francisco%20by-686656.jpg')"></span>
+        </span>
+        <a class="open" href="/san-francisco-by" data-target="id-san-francisco-by">Open</a>
+        <a class="close" href="/">Close</a>
+        <!-- <ul class="meta">
+    <li>Canon EOS M50</li>
+    <li>1/800</li>
+    <li><span class="aperture"><em>f</em>/</span>7.1</li>
+    </ul> -->
+      </li>
+    </ul>
+    <ul class="links">
+      <li class="sort"><a rel="me" href="#" title="Reverse sort order">Sort</a></li>
+      <li class="rss"><a rel="alternate" type="application/rss+xml" href="https://gallery.flottflyt.com/feed.xml" title="RSS Feed">RSS Feed</a></li>
+      <li class="email"><a rel="me" href="mailto:eirik.r.enger@startmail.com" title="Send me an email">Email</a></li>
+      <li class="github"><a rel="me" href="https://github.com/waschinski/photo-stream" title="Fork on Github">Github</a></li>
+      <li class="twitter"><a rel="me" href="https://twitter.com/engereirik" title="@engereirik on Twitter">Twitter</a></li>
+      <li class="github-me"><a rel="me" href="https://github.com/engeir" title="@engeir on Github">Github</a></li>
+      <li class="instagram"><a rel="me" href="https://instagram.com/eirikre" title="@eirikre on Instagram">Instagram</a></li>
+      <li class="link"><a rel="me" href="https://flottflyt.com/" title="Back to Flott Flyt">Back to Flott Flyt</a></li>
+    </ul>
+    <script>
+      const ESCAPE = 27;
+      const RIGHT = 39;
+      const LEFT = 37;
+      const UP = 38;
+      const DOWN = 40;
+      const TARGET_CLASS = 'target';
+      
+      const clickNavigationButton = (buttonClass) => {
+        const id = window.history.state && window.history.state.id;
+        if (id) {
+          const selector = `#${id} ${buttonClass}`;
+          const button = document.querySelector(selector);
+          button && button.click();
+        }
+      }
+      
+      const openPhoto = (id, href) => {
+        const photo = document.getElementById(id);
+        const title = photo.getAttribute('title');
+        removeTargetClass();
+        photo.classList.add(TARGET_CLASS);
+        document.title = title;
+        if (href) {
+          window.history.pushState({id: id}, '', href);
+        }
+      }
+      
+      const closePhoto = (href) => {
+        const title = document.querySelector('head title').getAttribute('data-title');
+        removeTargetClass();
+        document.title = title;
+        if (href) {
+          window.history.pushState({}, '', href);
+        }
+      }
+      
+      const removeTargetClass = () => {
+        let targets = document.querySelectorAll(`.${TARGET_CLASS}`);
+        targets.forEach((target) => {
+          target.classList.remove(TARGET_CLASS);
+        });
+      }
+      
+      const handleClick = (selector, event, callback) => {
+        if (event.target.matches(selector)) {
+          callback();
+          event.preventDefault();
+        }
+      }
+      
+      const handleKey = (keyCode, event, callback) => {
+        if (event.keyCode === keyCode) {
+          callback();
+          event.preventDefault();
+        }
+      }
+      
+      const reverseSorting = () => {
+      
+        var parent = document.getElementById('target');
+        for (var i = 1; i < parent.childNodes.length; i++){
+            parent.insertBefore(parent.childNodes[i], parent.firstChild);
+        }
+      
+      }
+      
+      window.onpopstate = function(event) {
+        if (event.state && event.state.id) {
+          const id = event.state.id;
+          openPhoto(id, null);
+        } else {
+          closePhoto(null);
+        }
+      }
+      
+      document.addEventListener('keydown', (event) => {
+        handleKey(ESCAPE, event, () => {
+          clickNavigationButton('.close');
+        });
+      
+        handleKey(RIGHT, event, () => {
+          clickNavigationButton('.next');
+        });
+      
+        handleKey(LEFT, event, () => {
+          clickNavigationButton('.previous');
+        });
+      
+        handleKey(UP, event, () => {
+          reverseSorting();
+        });
+      
+        handleKey(DOWN, event, () => {
+          reverseSorting();
+        });
+      });
+      
+      document.addEventListener('click', (event) => {
+        handleClick('[data-target][href]', event, () => {
+          const id = event.target.getAttribute('data-target');
+          const href = event.target.getAttribute('href');
+          openPhoto(id, href);
+        });
+      
+        handleClick('[href].close', event, () => {
+          const href = event.target.getAttribute('href');
+          closePhoto(href);
+        });
+      
+        handleClick('ul.links li.sort a', event, () => {
+          reverseSorting();
+        });
+      });
+      
+      lazyload();
+    </script>
+    <script src="/js/photos.js" data-photo-id="san-francisco-by" data-photo-url="/san-francisco-by" data-target-id="target"></script>
+  </body>
+</html>

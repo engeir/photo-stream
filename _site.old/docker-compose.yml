@@ -18,13 +18,11 @@ services:
       - DESCRIPTION=${DESCRIPTION}
       - BASEURL=${BASEURL}
       - URL=${URL}
-      - SHOW_RSS_FEED=${SHOW_RSS_FEED}
       - SHOW_OFFICIAL_GITHUB=${SHOW_OFFICIAL_GITHUB}
       - TWITTER_USERNAME=${TWITTER_USERNAME}
       - INSTAGRAM_USERNAME=${INSTAGRAM_USERNAME}
-      - ALLOW_ORIGINAL_DOWNLOAD=${ALLOW_ORIGINAL_DOWNLOAD}
     volumes:
-      - ${PHOTO_PATH}:/photo-stream/photos
+      - ${PHOTO_PATH}:/photo-stream/photos/original
     env_file: .env
     ports:
       - "4000:4000"

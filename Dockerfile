@@ -8,7 +8,7 @@ RUN apk update && apk upgrade &&\
 
 RUN wget -O ./vips-$VIPSVER.tar.gz https://github.com/libvips/libvips/releases/download/v$VIPSVER/vips-$VIPSVER.tar.gz && tar -xvzf ./vips-$VIPSVER.tar.gz && cd vips-$VIPSVER && ./configure && make && make install && cd .. && rm -r vips-$VIPSVER.tar.gz vips-$VIPSVER
 
-COPY ./ /photo-stream 
+COPY ./ /photo-stream
 
 WORKDIR /photo-stream
 

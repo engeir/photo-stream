@@ -14,7 +14,7 @@ want to copy the static site from the docker instance to the local machine. Firs
 check the docker id:
 
 ```bash
-docer container ls
+docker container ls
 ```
 
 Then we use that id to copy using
@@ -27,3 +27,7 @@ where `9585393b0d1b` is the docker id.
 
 To get my own favicons, I further copy over the contents of `./favicon_package_v0.16/`
 into `./_site/`.
+
+```bash
+cp -r ./favicon_package_v0.16/* ./_site
+```
